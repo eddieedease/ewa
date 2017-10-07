@@ -79,6 +79,7 @@
     var aantalphonestext;
 
     var gameselect = false;
+    var teamselect = false;
     var modeisselected = false;
 
     var mode1pbig;
@@ -115,6 +116,16 @@
     var kiesspel;
     var kiesanim;
 
+    // teams
+    var teamimg1, teamimg2, teamimg3, teamimg4, teamimg5, teamimg6, teamimg7, teamimg8, teamimg9, teamimg10;
+    var aantalteams;
+    var teamnames;
+
+    // handling the teamselection images
+    var teamback;
+    var teamcurrent;
+    var teamnext;
+
 
 
     Menu.prototype = {
@@ -130,7 +141,11 @@
             music = this.game.add.audio('menu');
 
             stopforproc = false;
-
+            // allowing teams
+            var phaserJSON = this.game.cache.getJSON('needy');
+            aantalteams = phaserJSON.aantal;
+            teamnames = phaserJSON.teamnames;
+            console.log(teamnames);
 
             kiesspel = this.game.add.sprite(60, 10, 'kiesspel');
             kiesanim = kiesspel.animations.add('anim', [0, 1, 2, 3], 3, true);
@@ -299,6 +314,22 @@
             creditcost.anchor.setTo(0.5, 0.5);
             creditcost.visible = false;
 
+
+
+            // displaying teams
+            if (aantalteams >= 3) {
+                teamback = this.game.add.image(this.game.width / 6 * 2, 100, 'team' + aantalteams);
+                teamback.anchor.set(0.5, 0.5);
+            }
+
+
+            teamcurrent = this.game.add.image(this.game.width / 6 * 3, 100, 'team1');
+            teamcurrent.anchor.set(0.5, 0.5);
+            if (aantalteams >= 2) {
+                teamnext = this.game.add.image(this.game.width / 6 * 4, 100, 'team2');
+                teamnext.anchor.set(0.5, 0.5);
+            }
+
             // NOTE Thumbnailing
             thumbs1 = this.game.add.image(this.game.width / 2, 27, 'thumbs1');
             thumbs2 = this.game.add.image(this.game.width / 2, 27, 'thumbs2');
@@ -443,6 +474,7 @@
                 }
             }
 
+            // TODO: Here goes the whole logic
             if (gameselect === true) {
                 mode1p.visible = false;
                 mode2pteam.visible = false;;
