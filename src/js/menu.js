@@ -125,6 +125,14 @@
     var teamback;
     var teamcurrent;
     var teamnext;
+    var timetochooseteams;
+    // boolean for keeping track when team is chosen.
+    var timetochooseteams;
+    var teamchoosen;
+
+    // these will act as a counter
+    var teamlinksvar;
+    var teamrechtsvar;
 
 
 
@@ -135,7 +143,10 @@
             bg = this.game.add.image(0, 0, 'menubg');
 
             this.game.multiplay = false;
-
+            teamchoosen = false;
+            timetochooseteams = false;
+            teamlinksvar = 0;
+            teamrechtsvar = 0;
 
             audioalarm = this.game.add.audio('alarm');
             music = this.game.add.audio('menu');
@@ -316,19 +327,7 @@
 
 
 
-            // displaying teams
-            if (aantalteams >= 3) {
-                teamback = this.game.add.image(this.game.width / 6 * 2, 100, 'team' + aantalteams);
-                teamback.anchor.set(0.5, 0.5);
-            }
 
-
-            teamcurrent = this.game.add.image(this.game.width / 6 * 3, 100, 'team1');
-            teamcurrent.anchor.set(0.5, 0.5);
-            if (aantalteams >= 2) {
-                teamnext = this.game.add.image(this.game.width / 6 * 4, 100, 'team2');
-                teamnext.anchor.set(0.5, 0.5);
-            }
 
             // NOTE Thumbnailing
             thumbs1 = this.game.add.image(this.game.width / 2, 27, 'thumbs1');
@@ -415,6 +414,26 @@
 
             standing = this.game.add.image(720, 200, 'standing');
             standing.kill();
+
+
+            // displaying teams
+            if (aantalteams >= 3) {
+                teamback = this.game.add.image(this.game.width / 8 * 2, 300, 'team' + aantalteams);
+                teamback.anchor.set(0.5, 0.5);
+                teamback.visible = false;
+                teamback.alpha = 0.1;
+            }
+
+
+            teamcurrent = this.game.add.image(this.game.width / 8 * 4, 300, 'team1');
+            teamcurrent.anchor.set(0.5, 0.5);
+            teamcurrent.visible = false;
+            if (aantalteams >= 2) {
+                teamnext = this.game.add.image(this.game.width / 8 * 6, 300, 'team2');
+                teamnext.anchor.set(0.5, 0.5);
+                teamnext.visible = false;
+                teamnext.alpha = 0.1;
+            }
         },
 
         update: function() {
@@ -474,8 +493,19 @@
                 }
             }
 
-            // TODO: Here goes the whole logic
-            if (gameselect === true) {
+            // TODO: HEREEEEE TEAMLOGIC
+            if (timetochooseteams === true) {
+                if (cursors.left.isDown) {
+                    console.log("left is pressed");
+                    teamlinksvar++;
+                } else if (cursors.right.isDown) {
+                    console.log("right is pressed");
+                    teamrechtsvar++;
+                }
+            }
+
+
+            if (gameselect === true && timetochooseteams === false) {
                 mode1p.visible = false;
                 mode2pteam.visible = false;;
                 mode2pversus.visible = false;
@@ -647,6 +677,8 @@
                     return;
                 }
 
+
+
                 // Alright, now check if credits and start game
                 if (playercurrenton != null && credit > 0 && stopforproc !== true) {
                     creditcost.visible = false;
@@ -748,7 +780,25 @@
                         tween.onComplete.add(this.tweenback, this);
                     }
                 }
-            } else if (gamestarted === false && gameselect === true && modeisselected === true) {
+            } else if (teamchoosen === false && gamestarted === false && gameselect === true && modeisselected === true) {
+                timetochooseteams = true;
+                console.log("Team must be chosennnn!!! Teamchoosen, implement logic");
+                selectie.visible = false;
+                mode1pbig.visible = false;
+                mode2pversusbig.visible = false;
+                mode2pteambig.visible = false;
+                selectie.visible = false;
+                teamcurrent.visible = true;
+                teamback.visible = true;
+                teamnext.visible = true;
+            } else if (teamchoosen === true && gamestarted === false && gameselect === true && modeisselected === true) {
+
+                // TODO: Team Choosing should enter here;
+
+
+
+
+
                 music.stop();
                 credit--;
                 localStorage.setItem('credits', credit);
@@ -793,6 +843,9 @@
                 }
                 //this.input.onDown.add(this.gamelaunch, this);
                 countdown = 15;
+
+
+
                 this.game.time.events.loop(Phaser.Timer.SECOND, this.countdowntimer, this);
                 quickstart = true;
             }
