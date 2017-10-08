@@ -125,6 +125,8 @@
     var teamback;
     var teamcurrent;
     var teamnext;
+
+    var currentteamnumber;
     var timetochooseteams;
     // boolean for keeping track when team is chosen.
     var timetochooseteams;
@@ -147,7 +149,7 @@
             timetochooseteams = false;
             teamlinksvar = 0;
             teamrechtsvar = 0;
-
+            currentteamnumber = 1;
             audioalarm = this.game.add.audio('alarm');
             music = this.game.add.audio('menu');
 
@@ -496,11 +498,37 @@
             // TODO: HEREEEEE TEAMLOGIC
             if (timetochooseteams === true) {
                 if (cursors.left.isDown) {
-                    console.log("left is pressed");
+
                     teamlinksvar++;
+                    if (teamlinksvar === 5) {
+                        teamlinksvar = 0;
+                        console.log("left is pressed");
+
+                        if (currentteamnumber === 1) {
+                            currentteamnumber = aantalteams;
+                        } else {
+                            currentteamnumber--;
+                        }
+                        // aantalteams currentteamnumber
+
+                        this.teamHover();
+                    }
                 } else if (cursors.right.isDown) {
-                    console.log("right is pressed");
+
                     teamrechtsvar++;
+                    if (teamrechtsvar === 5) {
+
+                        teamrechtsvar = 0;
+
+
+                        if (currentteamnumber === aantalteams) {
+                            currentteamnumber = 1;
+                        } else {
+                            currentteamnumber++;
+                        }
+                        this.teamHover();
+
+                    }
                 }
             }
 
@@ -624,6 +652,33 @@
                 creditcost.visible = false;
             }
 
+        },
+        teamHover: function() {
+            console.log("Team  " + currentteamnumber + " is gekozen");
+
+            var backstring;
+            var currentstring;
+            var nextstring;
+
+
+            // TODO: 
+            if (currentteamnumber === 1) {
+                backstring = 'team' + aantalteams;
+                currentstring = 'team' + currentteamnumber;
+                nextstring = 'team2';
+            } else if (currentteamnumber === aantalteams) {
+                backstring = 'team' + (aantalteams - 1);
+                currentstring = 'team' + currentteamnumber;
+                nextstring = 'team1';
+            } else {
+                backstring = 'team' + (currentteamnumber - 1);
+                currentstring = 'team' + currentteamnumber;
+                nextstring = 'team' + (currentteamnumber + 1);
+            }
+
+            teamback.loadTexture(backstring, 0);
+            teamcurrent.loadTexture(currentstring, 0);
+            teamnext.loadTexture(nextstring, 0);
         },
         startnow: function() {
             // First check if is film
