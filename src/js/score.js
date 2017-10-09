@@ -602,7 +602,7 @@
                     location.reload();
                 }
                 scoreaudio.stop();
-                this.game.state.start('menu');
+                location.reload();
                 return;
             }
         },
@@ -619,7 +619,7 @@
                     location.reload();
                 }
                 scoreaudio.stop();
-                this.game.state.start('menu');
+                location.reload();
                 return;
             }
         }

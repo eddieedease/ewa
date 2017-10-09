@@ -34,6 +34,59 @@
             this.game.highgame3 = JSON.parse(localStorage.getItem('highgame3'));
             this.game.highgame4 = JSON.parse(localStorage.getItem('highgame4'));
 
+            // localstorage for teams, imma just make some really really ulgy code right here
+            this.game.team1 = JSON.parse(localStorage.getItem('team1'));
+            this.game.team2 = JSON.parse(localStorage.getItem('team2'));
+            this.game.team3 = JSON.parse(localStorage.getItem('team3'));
+            this.game.team4 = JSON.parse(localStorage.getItem('team4'));
+            this.game.team5 = JSON.parse(localStorage.getItem('team5'));
+            this.game.team6 = JSON.parse(localStorage.getItem('team6'));
+            this.game.team7 = JSON.parse(localStorage.getItem('team7'));
+            this.game.team8 = JSON.parse(localStorage.getItem('team8'));
+            this.game.team9 = JSON.parse(localStorage.getItem('team9'));
+            this.game.team10 = JSON.parse(localStorage.getItem('team10'));
+
+            if (this.game.team1 === null) {
+                var cred = 0;
+                localStorage.setItem('team1', cred);
+            }
+            if (this.game.team2 === null) {
+                var cred = 0;
+                localStorage.setItem('team2', cred);
+            }
+            if (this.game.team3 === null) {
+                var cred = 0;
+                localStorage.setItem('team3', cred);
+            }
+            if (this.game.team4 === null) {
+                var cred = 0;
+                localStorage.setItem('team4', cred);
+            }
+            if (this.game.team5 === null) {
+                var cred = 0;
+                localStorage.setItem('team5', cred);
+            }
+            if (this.game.team6 === null) {
+                var cred = 0;
+                localStorage.setItem('team6', cred);
+            }
+            if (this.game.team7 === null) {
+                var cred = 0;
+                localStorage.setItem('team7', cred);
+            }
+            if (this.game.team8 === null) {
+                var cred = 0;
+                localStorage.setItem('team8', cred);
+            }
+            if (this.game.team9 === null) {
+                var cred = 0;
+                localStorage.setItem('team9', cred);
+            }
+            if (this.game.team10 === null) {
+                var cred = 0;
+                localStorage.setItem('team10', cred);
+            }
+
 
             this.game.aantalphones = localStorage.getItem('aantalphones');
             console.log(this.game.aantalphones);

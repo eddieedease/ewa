@@ -53,6 +53,11 @@
 
     var text;
 
+    var teamnames;
+    var aantalteams;
+
+    var teams = [];
+
     Screensaver.prototype = {
         create: function() {
             credit = localStorage.getItem('credits');
@@ -60,7 +65,26 @@
 
 
             var phaserJSON = this.game.cache.getJSON('needy');
-            console.log(phaserJSON);
+            teamnames = phaserJSON.teamnames;
+            aantalteams = phaserJSON.aantal;
+
+            // ugly theming
+            this.game.team1 = JSON.parse(localStorage.getItem('team1'));
+            this.game.team2 = JSON.parse(localStorage.getItem('team2'));
+            this.game.team3 = JSON.parse(localStorage.getItem('team3'));
+            this.game.team4 = JSON.parse(localStorage.getItem('team4'));
+            this.game.team5 = JSON.parse(localStorage.getItem('team5'));
+            this.game.team6 = JSON.parse(localStorage.getItem('team6'));
+            this.game.team7 = JSON.parse(localStorage.getItem('team7'));
+            this.game.team8 = JSON.parse(localStorage.getItem('team8'));
+            this.game.team9 = JSON.parse(localStorage.getItem('team9'));
+            this.game.team10 = JSON.parse(localStorage.getItem('team10'));
+            teams.push(this.game.team1, this.game.team2, this.game.team3, this.game.team4, this.game.team5, this.game.team6, this.game.team7, this.game.team8, this.game.team9, this.game.team10)
+
+            for (var index = 0; index < aantalteams; index++) {
+                // teams
+                console.log("team " + (index + 1) + "   SCORE IS " + teams[index] + "  " + teamnames[index] + " ")
+            }
             /*canvas = this.game.add.bitmapData(1000, 563);
             canvas.addToWorld();
 
@@ -142,7 +166,7 @@
 
         },
         restartVid: function() {
-          video.play();
+            video.play();
         },
 
         creditadd: function() {

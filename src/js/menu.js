@@ -127,7 +127,6 @@
     var teamnext;
 
     var currentteamnumber;
-    var timetochooseteams;
     // boolean for keeping track when team is chosen.
     var timetochooseteams;
     var teamchoosen;
@@ -500,7 +499,7 @@
                 if (cursors.left.isDown) {
 
                     teamlinksvar++;
-                    if (teamlinksvar === 5) {
+                    if (teamlinksvar === 17) {
                         teamlinksvar = 0;
                         console.log("left is pressed");
 
@@ -516,7 +515,7 @@
                 } else if (cursors.right.isDown) {
 
                     teamrechtsvar++;
-                    if (teamrechtsvar === 5) {
+                    if (teamrechtsvar === 17) {
 
                         teamrechtsvar = 0;
 
@@ -846,12 +845,22 @@
                 teamcurrent.visible = true;
                 teamback.visible = true;
                 teamnext.visible = true;
+                teamchoosen = true;
             } else if (teamchoosen === true && gamestarted === false && gameselect === true && modeisselected === true) {
 
-                // TODO: Team Choosing should enter here;
 
 
+                teamcurrent.visible = false;
+                teamback.visible = false;
+                teamnext.visible = false;
 
+                // give point to chosen team
+                var teamarray = [this.game.team1, this.game.team2, this.game.team3, this.game.team4, this.game.team5, this.game.team6, this.game.team7, this.game.team8, this.game.team9, this.game.team10];
+                console.log(teamarray);
+
+                var whichstringteam = 'team' + currentteamnumber;
+                var addwhat = teamarray[currentteamnumber - 1] + 1;
+                localStorage.setItem(whichstringteam, addwhat);
 
 
                 music.stop();
@@ -967,6 +976,9 @@
                 mode2pteambig.visible = false;
                 mode2pversusbig.visible = false;
                 selectie.visible = false;
+                teamcurrent.visible = false;
+                teamback.visible = false;
+                teamnext.visible = false;
             }
         },
 
