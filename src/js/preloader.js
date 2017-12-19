@@ -16,16 +16,18 @@
             // json config file..
             this.load.json('needy', 'assets/json/this.json');
             // team images. Just load all of them
-            this.load.image('team1', 'assets/json/teamimg/team1.png');
-            this.load.image('team2', 'assets/json/teamimg/team2.png');
-            this.load.image('team3', 'assets/json/teamimg/team3.png');
-            this.load.image('team4', 'assets/json/teamimg/team4.png');
-            this.load.image('team5', 'assets/json/teamimg/team5.png');
-            this.load.image('team6', 'assets/json/teamimg/team6.png');
-            this.load.image('team7', 'assets/json/teamimg/team7.png');
-            this.load.image('team8', 'assets/json/teamimg/team8.png');
-            this.load.image('team9', 'assets/json/teamimg/team9.png');
+            this.load.image('team1', 'assets/json/teamimg/team0.png');
+            this.load.image('team2', 'assets/json/teamimg/team1.png');
+            this.load.image('team3', 'assets/json/teamimg/team2.png');
+            this.load.image('team4', 'assets/json/teamimg/team3.png');
+            this.load.image('team5', 'assets/json/teamimg/team4.png');
+            this.load.image('team6', 'assets/json/teamimg/team5.png');
+            this.load.image('team7', 'assets/json/teamimg/team6.png');
+            this.load.image('team8', 'assets/json/teamimg/team7.png');
+            this.load.image('team9', 'assets/json/teamimg/team8.png');
+            this.load.image('team10', 'assets/json/teamimg/team9.png');
             this.load.image('team10', 'assets/json/teamimg/team10.png');
+            this.load.image('teambg', 'assets/teambg.png');
 
             // load audio files first..
             this.load.audio('menu', ['assets/audio/menu.ogg']);

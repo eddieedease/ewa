@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     function Menu() {}
@@ -33,6 +33,8 @@
 
     var keyp;
     var timmy;
+
+    var arcadeid;
 
     var phoneaddbg;
     var gear1;
@@ -117,11 +119,13 @@
     var kiesanim;
 
     // teams
-    var teamimg1, teamimg2, teamimg3, teamimg4, teamimg5, teamimg6, teamimg7, teamimg8, teamimg9, teamimg10;
+    var teamimg1, teamimg2, teamimg3, teamimg4, teamimg5, teamimg6, teamimg7, teamimg8, teamimg9, teamimg10, teamimg10;
     var aantalteams;
     var teamnames;
 
     // handling the teamselection images
+    var teambg;
+
     var teamback;
     var teamcurrent;
     var teamnext;
@@ -140,7 +144,7 @@
     Menu.prototype = {
 
 
-        create: function() {
+        create: function () {
             bg = this.game.add.image(0, 0, 'menubg');
 
             this.game.multiplay = false;
@@ -157,6 +161,7 @@
             var phaserJSON = this.game.cache.getJSON('needy');
             aantalteams = phaserJSON.aantal;
             teamnames = phaserJSON.teamnames;
+            arcadeid = phaserJSON.teamnames;
             console.log(teamnames);
 
             kiesspel = this.game.add.sprite(60, 10, 'kiesspel');
@@ -274,6 +279,9 @@
             phoneaddbg = this.game.add.image(this.game.width / 2, this.game.height / 2, 'phoneaddbg');
             phoneaddbg.anchor.set(0.5);
             phoneaddbg.visible = false;
+
+
+
 
             gramcal = parseInt(this.game.aantalphones) * 250;
             console.log(gramcal);
@@ -416,6 +424,10 @@
             standing = this.game.add.image(720, 200, 'standing');
             standing.kill();
 
+            teambg = this.game.add.image(this.game.width / 2, this.game.height / 2, 'teambg');
+            teambg.anchor.set(0.5);
+            teambg.visible = false;
+
 
             // displaying teams
             if (aantalteams >= 3) {
@@ -437,7 +449,7 @@
             }
         },
 
-        update: function() {
+        update: function () {
 
             if (screensaver === 3000) {
                 music.stop();
@@ -652,7 +664,7 @@
             }
 
         },
-        teamHover: function() {
+        teamHover: function () {
             console.log("Team  " + currentteamnumber + " is gekozen");
 
             var backstring;
@@ -679,7 +691,7 @@
             teamcurrent.loadTexture(currentstring, 0);
             teamnext.loadTexture(nextstring, 0);
         },
-        startnow: function() {
+        startnow: function () {
             // First check if is film
 
             if (quickstart === true) {
@@ -721,6 +733,26 @@
                         break;
                 }
                 return;
+            }
+
+
+            if (timetochooseteams === true) {
+                teamcurrent.visible = false;
+                teamback.visible = false;
+                teamnext.visible = false;
+                teamchoosen = true;
+                timetochooseteams = false;
+                teambg.visible = false;
+                stopforproc = false;
+                player.visible = true;
+
+
+
+                // https://cubestick.nl/ewasteapp/api/api/getall
+                // url for iot http://localhost:8888/ewacon/src/api/arcade/addphone/1/11
+                // make IOT call
+                this.makeIOTcall("https://cubestick.nl/ewasteapp/api/api/getall");
+
             }
 
 
@@ -834,18 +866,6 @@
                         tween.onComplete.add(this.tweenback, this);
                     }
                 }
-            } else if (teamchoosen === false && gamestarted === false && gameselect === true && modeisselected === true) {
-                timetochooseteams = true;
-                console.log("Team must be chosennnn!!! Teamchoosen, implement logic");
-                selectie.visible = false;
-                mode1pbig.visible = false;
-                mode2pversusbig.visible = false;
-                mode2pteambig.visible = false;
-                selectie.visible = false;
-                teamcurrent.visible = true;
-                teamback.visible = true;
-                teamnext.visible = true;
-                teamchoosen = true;
             } else if (teamchoosen === true && gamestarted === false && gameselect === true && modeisselected === true) {
 
 
@@ -914,7 +934,7 @@
                 quickstart = true;
             }
         },
-        countdowntimer: function() {
+        countdowntimer: function () {
             countdown = countdown - 1;
             countdowntext.text = countdown;
             if (countdown === 0) {
@@ -952,21 +972,35 @@
             }
 
         },
-        gamelaunch: function() {
+
+        makeIOTcall: function (theUrl, callBackIot) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    callback(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        },
+
+        callBackIot: function (_response){
+            console.log(_response);
+        },
+        gamelaunch: function () {
 
 
         },
-        tweenback: function() {
+        tweenback: function () {
             tween = this.game.add.tween(geencredits).to({
                 alpha: 0
             }, 3000, Phaser.Easing.Linear.None, true, 2000);
             tween.onComplete.add(this.deletetween, this);
         },
-        deletetween: function() {
+        deletetween: function () {
             geencredits.visible = false;
 
         },
-        cancelnow: function() {
+        cancelnow: function () {
             if (gameselect === true) {
                 creditcost.visible = true;
                 fill.visible = false;
@@ -982,40 +1016,40 @@
             }
         },
 
-        breakoutstart: function() {
+        breakoutstart: function () {
             music.stop();
             //this.game.state.start('breakout');
             this.game.state.start('score', false, false);
         },
-        catmousestart: function() {
+        catmousestart: function () {
             music.stop();
             //this.game.state.start('breakout');
             this.game.state.start('catmouse');
         },
-        racestart: function() {
+        racestart: function () {
             music.stop();
             //this.game.state.start('breakout');
             //this.game.state.start('racer');
             this.game.state.start('racer');
         },
-        platformerstart: function() {
+        platformerstart: function () {
             music.stop();
             //this.game.state.start('breakout');
             this.game.state.start('platformer');
         },
-        minerstart: function() {
+        minerstart: function () {
             music.stop();
             //this.game.state.start('breakout');
             //this.game.state.start('platformer');
             window.location.href = "./miner/index.html";
         },
-        recstart: function() {
+        recstart: function () {
             music.stop();
             //this.game.state.start('breakout');
             //this.game.state.start('platformer');
             window.location.href = "./rec/index.html";
         },
-        creditadd: function() {
+        creditadd: function () {
             standing.visible = false;
             valid.visible = true;
             gearsactivated = false;
@@ -1033,9 +1067,10 @@
 
             //this.game.state.start('breakout');
             //this.game.state.start('catmouse');
-            this.game.time.events.add(Phaser.Timer.SECOND * 2, this.backtoback, this);
+            this.game.time.events.add(Phaser.Timer.SECOND * 0.5, this.toTeamSelection, this);
+
         },
-        phonedenied: function() {
+        phonedenied: function () {
             standing.visible = false;
             timmy.visible = true;
             gearsactivated = false;
@@ -1045,7 +1080,7 @@
             //this.game.state.start('catmouse');
             this.game.time.events.add(Phaser.Timer.SECOND * 2, this.backtoback, this);
         },
-        backtoback: function() {
+        backtoback: function () {
             alarm.visible = false;
             valid.visible = false;
             phoneaddbg.visible = false;
@@ -1054,9 +1089,38 @@
             timmy.visible = false;
             player.visible = true;
             stopforproc = false;
-            //
+
         },
-        phonefound: function() {
+        toTeamSelection: function () {
+            // enabling team selection
+            // TODO: Implement skip this if team size = 1
+            // gameselect = true;
+
+            timetochooseteams = true;
+
+            alarm.visible = false;
+            valid.visible = false;
+            phoneaddbg.visible = false;
+            gear1.visible = false;
+            gear2.visible = false;
+            timmy.visible = false;
+            player.visible = false;
+            stopforproc = false;
+
+            teambg.visible = true;
+
+
+            selectie.visible = false;
+            mode1pbig.visible = false;
+            mode2pversusbig.visible = false;
+            mode2pteambig.visible = false;
+            selectie.visible = false;
+            teamcurrent.visible = true;
+            teamback.visible = true;
+            teamnext.visible = true;
+            teamchoosen = false;
+        },
+        phonefound: function () {
             screensaver = 0;
             audioalarm.play();
             stopforproc = true;
@@ -1083,7 +1147,7 @@
                 x: this.game.world.centerX - 250
             }, 7000, Phaser.Easing.Linear.None, true);
         },
-        checkOverlap: function(spriteA, spriteB) {
+        checkOverlap: function (spriteA, spriteB) {
             //game.stage.backgroundColor = '#992d2d';
             var boundsA = spriteA.getBounds();
             var boundsB = spriteB.getBounds();
@@ -1091,7 +1155,7 @@
 
         },
 
-        setOverlap: function(spriteA) {
+        setOverlap: function (spriteA) {
             spriteA.alpha = 1;
             if (stopforproc !== true) {
                 p1p2.visible = true;
@@ -1180,7 +1244,7 @@
             //var boundsB = spriteB.getBounds();
             //return Phaser.Rectangle.intersects(boundsA, boundsB);
         },
-        removeOverlap: function(spriteA) {
+        removeOverlap: function (spriteA) {
 
             if (currentHit === spriteA) {
 
