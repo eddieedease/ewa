@@ -161,7 +161,7 @@
             var phaserJSON = this.game.cache.getJSON('needy');
             aantalteams = phaserJSON.aantal;
             teamnames = phaserJSON.teamnames;
-            arcadeid = phaserJSON.teamnames;
+            arcadeid = phaserJSON.id;
             console.log(teamnames);
 
             kiesspel = this.game.add.sprite(60, 10, 'kiesspel');
@@ -195,26 +195,6 @@
 
             //  This sprite was created with the Phaser Gen Paint app
             //  also available in the Phaser Examples repo and on the Phaser site.
-
-            var dudeData = [
-                '.......3.....',
-                '......333....',
-                '....5343335..',
-                '...332333333.',
-                '..33333333333',
-                '..37773337773',
-                '..38587778583',
-                '..38588888583',
-                '..37888888873',
-                '...333333333.',
-                '.F....5556...',
-                '3E34.6757.6..',
-                '.E.55.666.5..',
-                '......777.5..',
-                '.....6..7....',
-                '.....7..7....'
-            ];
-
             //this.game.create.texture('phaserDude', dudeData, 4, 4, 0);
 
             player = this.game.add.sprite(480, 370, 'crp1');
@@ -740,18 +720,24 @@
                 teamcurrent.visible = false;
                 teamback.visible = false;
                 teamnext.visible = false;
-                teamchoosen = true;
+                
                 timetochooseteams = false;
                 teambg.visible = false;
-                stopforproc = false;
+                
                 player.visible = true;
+
+                teamchoosen = true;
+                stopforproc = false;
 
 
 
                 // https://cubestick.nl/ewasteapp/api/api/getall
                 // url for iot http://localhost:8888/ewacon/src/api/arcade/addphone/1/11
                 // make IOT call
-                this.makeIOTcall("https://cubestick.nl/ewasteapp/api/api/getall");
+                //
+                this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addphone/" + arcadeid + "/" + currentteamnumber);
+                // console.log("http://localhost:8888/ewacon/src/api/arcade/addphone/" + arcadeid + "/" + currentteamnumber);
+                //; 
 
             }
 
@@ -866,9 +852,9 @@
                         tween.onComplete.add(this.tweenback, this);
                     }
                 }
-            } else if (teamchoosen === true && gamestarted === false && gameselect === true && modeisselected === true) {
-
-
+            } else if ( gamestarted === false && gameselect === true && modeisselected === true) {
+                
+                console.log("komt hier nie")
 
                 teamcurrent.visible = false;
                 teamback.visible = false;
@@ -973,18 +959,14 @@
 
         },
 
-        makeIOTcall: function (theUrl, callBackIot) {
+        makeIOTcall: function (theUrl) {
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
-                    callback(xmlHttp.responseText);
+                    console.log(xmlHttp.responseText);
             }
             xmlHttp.open("GET", theUrl, true); // true for asynchronous 
             xmlHttp.send(null);
-        },
-
-        callBackIot: function (_response){
-            console.log(_response);
         },
         gamelaunch: function () {
 
@@ -1071,6 +1053,11 @@
 
         },
         phonedenied: function () {
+            http://localhost:8888/ewacon/src/api/arcade/addfailed/1
+            // Make the call through the arcade
+            this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addfailed/" + arcadeid);
+
+
             standing.visible = false;
             timmy.visible = true;
             gearsactivated = false;
@@ -1095,30 +1082,41 @@
             // enabling team selection
             // TODO: Implement skip this if team size = 1
             // gameselect = true;
+            
+            console.log(aantalteams);
+            if (aantalteams === 1){
+                teamchoosen = true;
+                alarm.visible = false;
+                valid.visible = false;
+                phoneaddbg.visible = false;
+                gear1.visible = false;
+                gear2.visible = false;
+                timmy.visible = false;
+                player.visible = true;
+                stopforproc = false;
+            } else {
+                timetochooseteams = true;
+                alarm.visible = false;
+                valid.visible = false;
+                phoneaddbg.visible = false;
+                gear1.visible = false;
+                gear2.visible = false;
+                timmy.visible = false;
+                player.visible = false;
+                stopforproc = false;
+                teambg.visible = true;
+                selectie.visible = false;
+                mode1pbig.visible = false;
+                mode2pversusbig.visible = false;
+                mode2pteambig.visible = false;
+                selectie.visible = false;
+                teamcurrent.visible = true;
+                teamback.visible = true;
+                teamnext.visible = true;
+                teamchoosen = false;
+            }
 
-            timetochooseteams = true;
-
-            alarm.visible = false;
-            valid.visible = false;
-            phoneaddbg.visible = false;
-            gear1.visible = false;
-            gear2.visible = false;
-            timmy.visible = false;
-            player.visible = false;
-            stopforproc = false;
-
-            teambg.visible = true;
-
-
-            selectie.visible = false;
-            mode1pbig.visible = false;
-            mode2pversusbig.visible = false;
-            mode2pteambig.visible = false;
-            selectie.visible = false;
-            teamcurrent.visible = true;
-            teamback.visible = true;
-            teamnext.visible = true;
-            teamchoosen = false;
+            
         },
         phonefound: function () {
             screensaver = 0;
