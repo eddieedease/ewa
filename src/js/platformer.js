@@ -196,7 +196,7 @@
                 platplayer2.anchor.setTo(0.5, 0.5);
                 platplayer2.scale.setTo(0.6, 0.6);
                 this.game.physics.arcade.enable(platplayer2);
-                platplayer2.body.setSize(100, 100, 0, 0);
+                platplayer2.body.setSize(100, 118, 0, 0);
                 platplayer2.body.bounce.y = 0.1;
                 platplayer2.body.gravity.y = 500;
                 platplayer2.body.collideWorldBounds = true;
@@ -228,7 +228,7 @@
 
 
             this.game.physics.arcade.enable(platplayer1);
-            platplayer1.body.setSize(100, 100, 0, 0);
+            platplayer1.body.setSize(100, 118, 0, 0);
 
             //  platplayer1 physics properties. Give the little guy a slight bounce.
             platplayer1.body.bounce.y = 0.1;

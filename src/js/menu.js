@@ -129,6 +129,7 @@
     var teamback;
     var teamcurrent;
     var teamnext;
+    var teamtext;
 
     var currentteamnumber;
     // boolean for keeping track when team is chosen.
@@ -139,7 +140,7 @@
     var teamlinksvar;
     var teamrechtsvar;
 
-
+    var insertsound;
 
     Menu.prototype = {
 
@@ -154,6 +155,7 @@
             teamrechtsvar = 0;
             currentteamnumber = 1;
             audioalarm = this.game.add.audio('alarm');
+            insertsound = this.game.add.audio('insert');
             music = this.game.add.audio('menu');
 
             stopforproc = false;
@@ -251,9 +253,11 @@
 
 
             creditnum = this.game.add.bitmapText(this.game.width * 0.63, this.game.height * 0.9, 'scorefont', credit, 45);
-
-
             creditnum.anchor.set(0.5);
+
+
+
+
 
 
             phoneaddbg = this.game.add.image(this.game.width / 2, this.game.height / 2, 'phoneaddbg');
@@ -375,10 +379,12 @@
             selectie.anchor.set(0.5, 0.5);
             selectie.visible = false;
 
-            currentgametext = this.game.add.bitmapText(this.game.width * 0.10, this.game.height * 0.10, 'scorefont', '', 30);
+            currentgametext = this.game.add.bitmapText(this.game.width * 0.10, this.game.height * 0.07, 'scorefont', '', 30);
 
-            currentgametext.anchor.setTo(0, 0.5);
+            
 
+
+         
 
 
 
@@ -427,6 +433,11 @@
                 teamnext.visible = false;
                 teamnext.alpha = 0.1;
             }
+
+
+            teamtext = this.game.add.bitmapText(this.game.width / 2, this.game.height /  7 * 6, 'scorefont', '1 van 6', 30);
+            teamtext.anchor.setTo(0.5, 0.5);
+            teamtext.visible = false;
         },
 
         update: function () {
@@ -491,7 +502,7 @@
                 if (cursors.left.isDown) {
 
                     teamlinksvar++;
-                    if (teamlinksvar === 17) {
+                    if (teamlinksvar === 8) {
                         teamlinksvar = 0;
                         console.log("left is pressed");
 
@@ -507,7 +518,7 @@
                 } else if (cursors.right.isDown) {
 
                     teamrechtsvar++;
-                    if (teamrechtsvar === 17) {
+                    if (teamrechtsvar === 8) {
 
                         teamrechtsvar = 0;
 
@@ -521,6 +532,9 @@
 
                     }
                 }
+
+                // displaying teams of text
+                teamtext.text = currentteamnumber + " van de " + aantalteams ;
             }
 
 
@@ -717,13 +731,15 @@
 
 
             if (timetochooseteams === true) {
+                teamtext.visible = true;
                 teamcurrent.visible = false;
                 teamback.visible = false;
                 teamnext.visible = false;
-                
+                teamtext.visible = false;
+
                 timetochooseteams = false;
                 teambg.visible = false;
-                
+
                 player.visible = true;
 
                 teamchoosen = true;
@@ -852,8 +868,8 @@
                         tween.onComplete.add(this.tweenback, this);
                     }
                 }
-            } else if ( gamestarted === false && gameselect === true && modeisselected === true) {
-                
+            } else if (gamestarted === false && gameselect === true && modeisselected === true) {
+
                 console.log("komt hier nie")
 
                 teamcurrent.visible = false;
@@ -1053,9 +1069,9 @@
 
         },
         phonedenied: function () {
-            http://localhost:8888/ewacon/src/api/arcade/addfailed/1
-            // Make the call through the arcade
-            this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addfailed/" + arcadeid);
+            http: //localhost:8888/ewacon/src/api/arcade/addfailed/1
+                // Make the call through the arcade
+                this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addfailed/" + arcadeid);
 
 
             standing.visible = false;
@@ -1079,12 +1095,15 @@
 
         },
         toTeamSelection: function () {
+            teamtext.visible = true;
+            insertsound.play();
             // enabling team selection
             // TODO: Implement skip this if team size = 1
             // gameselect = true;
-            
+
+            // skip this whole section 
             console.log(aantalteams);
-            if (aantalteams === 1){
+            if (aantalteams === 1) {
                 teamchoosen = true;
                 alarm.visible = false;
                 valid.visible = false;
@@ -1094,6 +1113,8 @@
                 timmy.visible = false;
                 player.visible = true;
                 stopforproc = false;
+                // TODO make an IOT call, one team to the database - ewacon (standard);
+                this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addphone/" + arcadeid + "/1");
             } else {
                 timetochooseteams = true;
                 alarm.visible = false;
@@ -1116,7 +1137,7 @@
                 teamchoosen = false;
             }
 
-            
+
         },
         phonefound: function () {
             screensaver = 0;

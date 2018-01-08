@@ -31,6 +31,7 @@
 
             // load audio files first..
             this.load.audio('menu', ['assets/audio/menu.ogg']);
+            this.load.audio('insert', ['assets/audio/insert.ogg']);
             this.load.audio('platformer', ['assets/audio/platformer.ogg']);
             this.load.audio('breakout', ['assets/audio/breakout.ogg']);
             this.load.audio('racer', ['assets/audio/catmouse.ogg']);
