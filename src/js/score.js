@@ -91,12 +91,17 @@
 
     var scoresssss;
 
+    var timeralready = false;
+
 
     var alfabet = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '@'];
 
     //scoring
     var scoresArray = [];
     var nameArray = [];
+
+    var timerdisplay;
+    var counter = 45;
 
     //control
 
@@ -224,6 +229,8 @@
             //NOTE settings up player inputs (iffy)
 
             if (highp1) {
+                this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
+                timeralready = true;
                 knoppenscore.visible = true;
                 backbutton.visible = false;
                 let11 = this.game.add.bitmapText(this.game.width / 2 - 100, this.game.height / 2, 'scorefont', 'a', 50);
@@ -256,6 +263,9 @@
             backtomain.onDown.add(this.backtomain, this);
 
             if (highp2 && this.game.multiplay === true) {
+                if (timeralready === false) {
+                    this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
+                }
                 knoppenscore.visible = true;
                 backbutton.visible = false;
                 let21 = this.game.add.bitmapText(this.game.width / 2 - 100, this.game.height / 2 + 180, 'scorefont', 'a', 50);
@@ -317,7 +327,9 @@
 
 
 
-            //backbutton.visible = false;
+            // adding timer
+            timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6,this.game.world.height - 40, 'scorefont', '', 45);
+            timerdisplay.anchor.setTo(0.5, 0.5);
 
         },
 
@@ -327,6 +339,41 @@
 
 
 
+        },
+        timerLoop: function() {
+            //slidertweento.start();
+            if (counter === 0 && toScore === false) {
+                toScore = true;
+                timerdisplay.setText(" ");
+                p1ready = true;
+                p2ready = true;
+
+
+
+                this.showscores();
+            }
+
+            if (counter > 0) {
+                counter--;
+                if (p1ready === true && p2ready == true) {
+                    timerdisplay.setText(" ");
+                } else {
+                    timerdisplay.setText(counter);
+                }
+
+            } else {
+                if (p1ready !== true && p2ready !== true) {
+                    timerdisplay.setText(" ");
+                    arrowcurrent1.visible = false;
+                    arrowcurrent2.visible = false;
+                    p1ready = true;
+                    p2ready = true;
+                    this.showscores();
+                }
+
+            }
+
+            //timerdisplay.fixedToCamera = true;
         },
 
         showscores: function() {
@@ -367,6 +414,7 @@
 
                 //clean up everything
                 if (highp1) {
+                  
                     let11.destroy();
                     let12.destroy();
                     let13.destroy();
