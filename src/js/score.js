@@ -103,6 +103,10 @@
     var timerdisplay;
     var counter = 45;
 
+    var highscoreishit = false;
+    var iotgamenumber = 0;
+    var iotarcadeid;
+
     //control
 
 
@@ -112,6 +116,9 @@
 
             name1 = ["a", "", "", ""];
             name2 = ["a", "", "", ""];
+
+            var phaserJSON = this.game.cache.getJSON('needy');
+            iotarcadeid = phaserJSON.id;
 
             this.game.add.image(0, 0, 'scorebg');
             dudes = this.game.add.image(this.game.width / 2, this.game.height - 150, 'scoredudes');
@@ -157,27 +164,32 @@
             // Check boot.js for the current
             switch (this.game.currentgame) {
                 case "breakout":
+                    iotgamenumber = 1;
                     console.log("breakouk scores");
                     scoresArray = this.game.highgame1[0];
                     nameArray = this.game.highgame1[1];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Raak 'm vaak", 40);
                     break;
                 case "catmouse":
+                iotgamenumber = 2;
                     scoresArray = this.game.highgame2[0];
                     nameArray = this.game.highgame2[1];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Gooi je zooi", 40);
                     break;
                 case "racer":
+                iotgamenumber = 3;
                     scoresArray = this.game.highgame3[0];
                     nameArray = this.game.highgame3[1];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Race 'm rond", 40);
                     break;
                 case "platformer":
+                iotgamenumber = 4;
                     scoresArray = this.game.highgame4[0];
                     nameArray = this.game.highgame4[1];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Prullenbak Bullebak", 40);
                     break;
                 case "other":
+                iotgamenumber = 0;
                     console.log("Not coming from any game");
                     scoresArray = this.game.highgame1[0];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "TEST", 40);
@@ -229,6 +241,7 @@
             //NOTE settings up player inputs (iffy)
 
             if (highp1) {
+                highscoreishit = true;
                 this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
                 timeralready = true;
                 knoppenscore.visible = true;
@@ -263,6 +276,7 @@
             backtomain.onDown.add(this.backtomain, this);
 
             if (highp2 && this.game.multiplay === true) {
+                highscoreishit = true;
                 if (timeralready === false) {
                     this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
                 }
@@ -375,9 +389,25 @@
 
             //timerdisplay.fixedToCamera = true;
         },
+        makeIOTcall: function (theUrl) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    console.log(xmlHttp.responseText);
+            }
+            xmlHttp.open("GET", theUrl, true); // true for asynchronous 
+            xmlHttp.send(null);
+        },
 
         showscores: function() {
             //dudes.visible = true;
+            if (highscoreishit === true){
+                var milliseconds = new Date().getTime();
+                console.log("sending");
+                // sending to the iot connection
+                this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/submitscore/" + iotarcadeid + "/"+ iotgamenumber + "?rnd="+ milliseconds +"&name1=" + nameArray[0] + "&score1=" + scoresArray[0] + "&name2=" + nameArray[1]+ "&score2="+ scoresArray[1]+ "&name3=" + nameArray[2] + "&score3=" +scoresArray[2] + "&name4=" +nameArray[3] + "&score4=" + scoresArray[3] + "&name5=" + nameArray[4]+ "&score5=" + scoresArray[4]);
+                highscoreishit = false
+            }
 
             if (p1ready && p2ready) {
                 knoppenscore.visible = false;

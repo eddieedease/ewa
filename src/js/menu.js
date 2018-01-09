@@ -745,7 +745,7 @@
                 teamchoosen = true;
                 stopforproc = false;
 
-
+                
 
                 // https://cubestick.nl/ewasteapp/api/api/getall
                 // url for iot http://localhost:8888/ewacon/src/api/arcade/addphone/1/11
