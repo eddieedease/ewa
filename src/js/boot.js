@@ -27,6 +27,9 @@
                 this.game.scale.updateLayout(true);
             }
 
+            // flag for creditadd remembering on screensaver to menu
+            this.game.screensavercreditadded = false;
+
             // NOTE preparing the scoring, use local storage, retrieve or create new
             this.game.currentgame = "other";
             this.game.highgame1 = JSON.parse(localStorage.getItem('highgame1'));

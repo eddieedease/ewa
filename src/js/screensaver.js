@@ -178,13 +178,17 @@
 
 
 
-
-            credit = parseInt(credit) + 3;
+            // We are not adding the credit in here in here anymore, we set a global flag and the menu will do the rest
+            this.game.screensavercreditadded = true;
+            /* credit = parseInt(credit) + 3;
 
             localStorage.setItem('credits', credit);
 
             this.game.aantalphones = this.game.aantalphones + 1;
-            localStorage.setItem('aantalphones', this.game.aantalphones);
+            localStorage.setItem('aantalphones', this.game.aantalphones); */
+
+
+
             valid.visible = true;
             this.game.time.events.add(Phaser.Timer.SECOND * 3, this.creditgone, this);
         },

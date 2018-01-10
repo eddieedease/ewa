@@ -26,7 +26,7 @@
             this.load.image('team8', 'assets/json/teamimg/team7.png');
             this.load.image('team9', 'assets/json/teamimg/team8.png');
             this.load.image('team10', 'assets/json/teamimg/team9.png');
-            this.load.image('team10', 'assets/json/teamimg/team10.png');
+            this.load.image('team11', 'assets/json/teamimg/team10.png');
             this.load.image('teambg', 'assets/teambg.png');
 
             // load audio files first..

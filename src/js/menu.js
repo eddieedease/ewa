@@ -438,6 +438,15 @@
             teamtext = this.game.add.bitmapText(this.game.width / 2, this.game.height /  7 * 6, 'scorefont', '1 van 6', 30);
             teamtext.anchor.setTo(0.5, 0.5);
             teamtext.visible = false;
+
+
+            // check if a credit add from the screensaver screen is added
+            if ( this.game.screensavercreditadded === true){
+                this.game.screensavercreditadded = false;
+                // activate o key press
+                this.creditadd();
+            }
+            
         },
 
         update: function () {
