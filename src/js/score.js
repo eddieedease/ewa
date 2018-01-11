@@ -337,6 +337,7 @@
                 backtomain = true;
                 p2back = this.input.keyboard.addKey(Phaser.Keyboard.E);
                 p2back.onDown.add(this.p2back, this);
+                this.game.time.events.add(Phaser.Timer.SECOND * 15, this.toScreensaver, this);
             }
 
 
@@ -477,9 +478,12 @@
                 scoreaudio.play();
             }
 
-
+            this.game.time.events.add(Phaser.Timer.SECOND * 15, this.toScreensaver, this);
         },
-
+        toScreensaver: function() {
+            scoreaudio.stop();
+            this.game.state.start('screensaver');
+        },
         // OK TIME FOR THE KEYPRESS HANDLING
         p1up: function() {
 
