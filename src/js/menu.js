@@ -882,9 +882,11 @@
                 console.log("komt hier nie")
 
                 teamcurrent.visible = false;
+
+                if (aantalteams >= 3) {
                 teamback.visible = false;
                 teamnext.visible = false;
-
+            }
                 // give point to chosen team
                 var teamarray = [this.game.team1, this.game.team2, this.game.team3, this.game.team4, this.game.team5, this.game.team6, this.game.team7, this.game.team8, this.game.team9, this.game.team10];
                 console.log(teamarray);

@@ -57,6 +57,8 @@
     var p1;
     var p2;
 
+    var toScore = false;
+
     var scorestext;
 
     var highscoreChanged = false;
@@ -101,7 +103,7 @@
     var nameArray = [];
 
     var timerdisplay;
-    var counter = 45;
+    var counter = 10;
 
     var highscoreishit = false;
     var iotgamenumber = 0;
@@ -364,6 +366,31 @@
                 p2ready = true;
 
 
+                if (highp1){
+                    genname1 = name1.join('');
+                    p1ready = true;
+                    headertext.text = '';
+                    aantalhigh--;
+                    arrowcurrent1.visible = false;
+                    scoresArray.splice(plek1, 0, scorep1);
+                    nameArray.splice(plek1, 0, genname1);
+                    scoresArray.splice(5, 1);
+                    nameArray.splice(5, 1);
+                }
+
+                if (highp2){
+                    genname2 = name2.join('');
+                    p2ready = true;
+                    aantalhigh--;
+                    arrowcurrent2.visible = false;
+                    headertext.text = '';
+                    scoresArray.splice(plek2, 0, scorep2);
+                    nameArray.splice(plek2, 0, genname2);
+                    scoresArray.splice(5, 1);
+                    nameArray.splice(5, 1);
+                }
+
+
 
                 this.showscores();
             }
@@ -401,6 +428,17 @@
         },
 
         showscores: function() {
+
+            
+           
+
+            if (highp2){
+                arrowcurrent2.visible = false;
+            }
+
+            if (highp1){
+                arrowcurrent1.visible = false;
+            }
             //dudes.visible = true;
             if (highscoreishit === true){
                 var milliseconds = new Date().getTime();
