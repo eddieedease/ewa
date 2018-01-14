@@ -103,7 +103,7 @@
     var nameArray = [];
 
     var timerdisplay;
-    var counter = 10;
+    var counter = 45;
 
     var highscoreishit = false;
     var iotgamenumber = 0;
@@ -128,7 +128,7 @@
             dudes.anchor.setTo(0.5, 0.5);
             dudes.visible = false;
 
-
+            counter = 45;
 
             knoppenscore = this.game.add.sprite(25, 385, 'knoppenscore');
             knoppenscore.visible = false;
@@ -432,14 +432,13 @@
             
            
 
-            if (highp2){
-                arrowcurrent2.visible = false;
-            }
+            
 
-            if (highp1){
-                arrowcurrent1.visible = false;
-            }
-            //dudes.visible = true;
+          
+            
+
+            if (p1ready && p2ready) {
+                //dudes.visible = true;
             if (highscoreishit === true){
                 var milliseconds = new Date().getTime();
                 console.log("sending");
@@ -447,8 +446,6 @@
                 this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/submitscore/" + iotarcadeid + "/"+ iotgamenumber + "?rnd="+ milliseconds +"&name1=" + nameArray[0] + "&score1=" + scoresArray[0] + "&name2=" + nameArray[1]+ "&score2="+ scoresArray[1]+ "&name3=" + nameArray[2] + "&score3=" +scoresArray[2] + "&name4=" +nameArray[3] + "&score4=" + scoresArray[3] + "&name5=" + nameArray[4]+ "&score5=" + scoresArray[4]);
                 highscoreishit = false
             }
-
-            if (p1ready && p2ready) {
                 knoppenscore.visible = false;
                 backbutton.visible = true;
                 dudes.visible = true;
@@ -668,6 +665,7 @@
                     currentnumber1++;
                     arrowcurrent1.x = arrowcurrent1.x + 50;
                 } else {
+                    
                     //TODO set ok for score. set all
                     genname1 = name1.join('');
                     p1ready = true;

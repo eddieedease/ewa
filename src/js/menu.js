@@ -381,10 +381,10 @@
 
             currentgametext = this.game.add.bitmapText(this.game.width * 0.10, this.game.height * 0.07, 'scorefont', '', 30);
 
-            
 
 
-         
+
+
 
 
 
@@ -416,7 +416,7 @@
 
 
             // displaying teams
-            if (aantalteams >= 3) {
+            if (aantalteams >= 2) {
                 teamback = this.game.add.image(this.game.width / 8 * 2, 300, 'team' + aantalteams);
                 teamback.anchor.set(0.5, 0.5);
                 teamback.visible = false;
@@ -435,18 +435,18 @@
             }
 
 
-            teamtext = this.game.add.bitmapText(this.game.width / 2, this.game.height /  7 * 6, 'scorefont', '1 van 6', 30);
+            teamtext = this.game.add.bitmapText(this.game.width / 2, this.game.height / 7 * 6, 'scorefont', '1 van 6', 30);
             teamtext.anchor.setTo(0.5, 0.5);
             teamtext.visible = false;
 
 
             // check if a credit add from the screensaver screen is added
-            if ( this.game.screensavercreditadded === true){
+            if (this.game.screensavercreditadded === true) {
                 this.game.screensavercreditadded = false;
                 // activate o key press
                 this.creditadd();
             }
-            
+
         },
 
         update: function () {
@@ -543,7 +543,7 @@
                 }
 
                 // displaying teams of text
-                teamtext.text = currentteamnumber + " van de " + aantalteams ;
+                teamtext.text = currentteamnumber + " van de " + aantalteams;
             }
 
 
@@ -742,8 +742,10 @@
             if (timetochooseteams === true) {
                 teamtext.visible = true;
                 teamcurrent.visible = false;
-                teamback.visible = false;
-                teamnext.visible = false;
+                if (aantalteams >= 2) {
+                    teamback.visible = false;
+                    teamnext.visible = false;
+                }
                 teamtext.visible = false;
 
                 timetochooseteams = false;
@@ -754,7 +756,7 @@
                 teamchoosen = true;
                 stopforproc = false;
 
-                
+
 
                 // https://cubestick.nl/ewasteapp/api/api/getall
                 // url for iot http://localhost:8888/ewacon/src/api/arcade/addphone/1/11
@@ -883,10 +885,10 @@
 
                 teamcurrent.visible = false;
 
-                if (aantalteams >= 3) {
-                teamback.visible = false;
-                teamnext.visible = false;
-            }
+                if (aantalteams >= 2) {
+                    teamback.visible = false;
+                    teamnext.visible = false;
+                }
                 // give point to chosen team
                 var teamarray = [this.game.team1, this.game.team2, this.game.team3, this.game.team4, this.game.team5, this.game.team6, this.game.team7, this.game.team8, this.game.team9, this.game.team10];
                 console.log(teamarray);
@@ -1020,8 +1022,12 @@
                 mode2pversusbig.visible = false;
                 selectie.visible = false;
                 teamcurrent.visible = false;
-                teamback.visible = false;
-                teamnext.visible = false;
+
+
+                if (aantalteams >= 2) {
+                    teamback.visible = false;
+                    teamnext.visible = false;
+                }
             }
         },
 
