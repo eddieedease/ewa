@@ -1122,6 +1122,7 @@
                 timmy.visible = false;
                 player.visible = true;
                 stopforproc = false;
+                teamtext.visible = false;
                 // TODO make an IOT call, one team to the database - ewacon (standard);
                 this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addphone/" + arcadeid + "/1");
             } else {
