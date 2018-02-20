@@ -48,6 +48,11 @@
             this.game.team8 = JSON.parse(localStorage.getItem('team8'));
             this.game.team9 = JSON.parse(localStorage.getItem('team9'));
             this.game.team10 = JSON.parse(localStorage.getItem('team10'));
+            this.game.team11 = JSON.parse(localStorage.getItem('team11'));
+            this.game.team12 = JSON.parse(localStorage.getItem('team12'));
+            this.game.team13 = JSON.parse(localStorage.getItem('team13'));
+            this.game.team14 = JSON.parse(localStorage.getItem('team14'));
+            this.game.team15 = JSON.parse(localStorage.getItem('team15'));
 
             if (this.game.team1 === null) {
                 var cred = 0;
@@ -88,6 +93,26 @@
             if (this.game.team10 === null) {
                 var cred = 0;
                 localStorage.setItem('team10', cred);
+            }
+            if (this.game.team11 === null) {
+                var cred = 0;
+                localStorage.setItem('team11', cred);
+            }
+            if (this.game.team12 === null) {
+                var cred = 0;
+                localStorage.setItem('team12', cred);
+            }
+            if (this.game.team13 === null) {
+                var cred = 0;
+                localStorage.setItem('team13', cred);
+            }
+            if (this.game.team14 === null) {
+                var cred = 0;
+                localStorage.setItem('team14', cred);
+            }
+            if (this.game.team15 === null) {
+                var cred = 0;
+                localStorage.setItem('team15', cred);
             }
 
 

@@ -742,10 +742,12 @@
             if (timetochooseteams === true) {
                 teamtext.visible = true;
                 teamcurrent.visible = false;
+
                 if (aantalteams >= 2) {
                     teamback.visible = false;
                     teamnext.visible = false;
                 }
+
                 teamtext.visible = false;
 
                 timetochooseteams = false;
@@ -757,12 +759,76 @@
                 stopforproc = false;
 
 
+                switch (currentteamnumber) {
+                    case 1:
+                        this.game.team1 = this.game.team1 + 1;
+                        var up = this.game.team1;
+                        break;
+                    case 2:
+                        this.game.team2 = this.game.team2 + 1;
+                        var up = this.game.team2;
+                        break;
+                    case 3:
+                        this.game.team3 = this.game.team3 + 1;
+                        var up = this.game.team3;
+                        break;
+                    case 4:
+                        this.game.team4 = this.game.team4 + 1;
+                        var up = this.game.team4;
+                        break;
+                    case 5:
+                        this.game.team5 = this.game.team5 + 1;
+                        var up = this.game.team5;
+                        break;
+                    case 6:
+                        this.game.team6 = this.game.team6 + 1;
+                        var up = this.game.team6;
+                        break;
+                    case 7:
+                        this.game.team7 = this.game.team7 + 1;
+                        var up = this.game.team7;
+                        break;
+                    case 8:
+                        this.game.team8 = this.game.team8 + 1;
+                        var up = this.game.team8;
+                        break;
+                    case 9:
+                        this.game.team9 = this.game.team9 + 1;
+                        var up = this.game.team9;
+                        break;
+                    case 10:
+                        this.game.team10 = this.game.team10 + 1;
+                        var up = this.game.team10;
+                        break;
+                    case 11:
+                        this.game.team11 = this.game.team11 + 1;
+                        var up = this.game.team11;
+                        break;
+                    case 12:
+                        this.game.team12 = this.game.team12 + 1;
+                        var up = this.game.team12;
+                        break;
+                    case 13:
+                        this.game.team13 = this.game.team1 + 13;
+                        var up = this.game.team13;
+                        break;
+                    case 14:
+                        this.game.team14 = this.game.team1 + 14;
+                        var up = this.game.team14;
+                        break;
+                    case 15:
+                        this.game.team15 = this.game.team15 + 1;
+                        var up = this.game.team15;
+                        break;
+                }
+
+
 
                 // https://cubestick.nl/ewasteapp/api/api/getall
                 // url for iot http://localhost:8888/ewacon/src/api/arcade/addphone/1/11
                 // make IOT call
                 //
-                this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addphone/" + arcadeid + "/" + currentteamnumber);
+                this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addphone/" + arcadeid + "/" + this.game.aantalphones + "/" + currentteamnumber + "/" + up);
                 // console.log("http://localhost:8888/ewacon/src/api/arcade/addphone/" + arcadeid + "/" + currentteamnumber);
                 //; 
 
