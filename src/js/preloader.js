@@ -25,6 +25,10 @@
             this.load.image('team9', 'assets/json/teamimg/team8.png');
             this.load.image('team10', 'assets/json/teamimg/team9.png');
             this.load.image('team11', 'assets/json/teamimg/team10.png');
+            this.load.image('team12', 'assets/json/teamimg/team11.png');
+            this.load.image('team13', 'assets/json/teamimg/team12.png');
+            this.load.image('team14', 'assets/json/teamimg/team13.png');
+            this.load.image('team15', 'assets/json/teamimg/team14.png');
             this.load.image('teambg', 'assets/teambg.png');
 
             // load audio files first..
