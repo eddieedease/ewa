@@ -763,62 +763,77 @@
                     case 1:
                         this.game.team1 = this.game.team1 + 1;
                         var up = this.game.team1;
+                        localStorage.setItem('team1', up);
                         break;
                     case 2:
                         this.game.team2 = this.game.team2 + 1;
                         var up = this.game.team2;
+                        localStorage.setItem('team2', up);
                         break;
                     case 3:
                         this.game.team3 = this.game.team3 + 1;
                         var up = this.game.team3;
+                        localStorage.setItem('team3', up);
                         break;
                     case 4:
                         this.game.team4 = this.game.team4 + 1;
                         var up = this.game.team4;
+                        localStorage.setItem('team4', up);
                         break;
                     case 5:
                         this.game.team5 = this.game.team5 + 1;
                         var up = this.game.team5;
+                        localStorage.setItem('team5', up);
                         break;
                     case 6:
                         this.game.team6 = this.game.team6 + 1;
                         var up = this.game.team6;
+                        localStorage.setItem('team6', up);
                         break;
                     case 7:
                         this.game.team7 = this.game.team7 + 1;
                         var up = this.game.team7;
+                        localStorage.setItem('team7', up);
                         break;
                     case 8:
                         this.game.team8 = this.game.team8 + 1;
                         var up = this.game.team8;
+                        localStorage.setItem('team8', up);
                         break;
                     case 9:
                         this.game.team9 = this.game.team9 + 1;
                         var up = this.game.team9;
+                        localStorage.setItem('team9', up);
                         break;
                     case 10:
                         this.game.team10 = this.game.team10 + 1;
                         var up = this.game.team10;
+                        localStorage.setItem('team10', up);
                         break;
                     case 11:
                         this.game.team11 = this.game.team11 + 1;
                         var up = this.game.team11;
+                        localStorage.setItem('team11', up);
                         break;
                     case 12:
                         this.game.team12 = this.game.team12 + 1;
                         var up = this.game.team12;
+                        localStorage.setItem('team12', up);
                         break;
                     case 13:
                         this.game.team13 = this.game.team1 + 13;
                         var up = this.game.team13;
+                        localStorage.setItem('team13', up);
                         break;
                     case 14:
                         this.game.team14 = this.game.team1 + 14;
                         var up = this.game.team14;
+                        localStorage.setItem('team14', up);
                         break;
                     case 15:
                         this.game.team15 = this.game.team15 + 1;
                         var up = this.game.team15;
+                        localStorage.setItem('team15', up);
                         break;
                 }
 
