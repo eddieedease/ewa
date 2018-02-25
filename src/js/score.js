@@ -717,9 +717,11 @@
         backtomain: function() {
             if (backtomain === true) {
                 if (this.game.currentgame === "racer") {
+                    this.game.destroy();
                     location.reload();
                 }
                 scoreaudio.stop();
+                this.game.destroy();
                 location.reload();
                 return;
             }
@@ -734,9 +736,11 @@
                 }
             } else if (backtomain === true) {
                 if (this.game.currentgame === "racer") {
+                    this.game.destroy();
                     location.reload();
                 }
                 scoreaudio.stop();
+                this.game.destroy();
                 location.reload();
                 return;
             }
