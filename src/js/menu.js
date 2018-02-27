@@ -176,13 +176,13 @@
             hit2 = this.game.add.image(255, 250, 'hit2');
             hit3 = this.game.add.image(300, 420, 'hit3');
             hit4 = this.game.add.image(446, 250, 'hit4');
-            hit5 = this.game.add.image(100, 420, 'hit5');
-            hit6 = this.game.add.image(620, 250, 'hit6');
+            hit5 = this.game.add.image(-300, -300, 'hit5');
+            hit6 = this.game.add.image(-300, -300, 'hit6');
             filmhit = this.game.add.image(900, 260, 'filmhit');
 
 
 
-
+            
             hitArray = [hit1, hit2, hit3, hit4, hit5, hit6, filmhit];
 
             for (var b = 0; b < hitArray.length; b++) {
@@ -731,10 +731,12 @@
                         break;
                     case 4:
                         gameselect = false;
+                        this.game.destroy();
                         window.location.href = "./miner/index.html";
                         break;
                     case 5:
                         gameselect = false;
+                        this.game.destroy();
                         window.location.href = "./rec/index.html";
                         break;
                 }
