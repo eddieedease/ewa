@@ -302,6 +302,8 @@
                 return;
             }
 
+            video.stop();
+            video.destroy();
             this.game.state.start('menu', true, false);
         }
 

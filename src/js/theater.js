@@ -138,7 +138,9 @@
       }
       filmisplaying = false;
       seats.visible = true;
-      this.game.state.start('menu');
+      this.game.state.start('screensaver', true, false);
+      //this.game.destroy();
+      //location.reload();
     },
     goLeft: function() {
       console.log("Going left!");

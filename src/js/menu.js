@@ -450,10 +450,13 @@
         },
 
         update: function () {
-
-            if (screensaver === 3000) {
+            // needs back at 30
+            if (screensaver === 500) {
                 music.stop();
-                location.reload();
+
+                this.game.state.start('screensaver', true, false);
+                // this.game.destroy();
+                // location.reload();
             }
             player.body.velocity.x = 0;
             player.body.velocity.y = 0;

@@ -517,7 +517,9 @@
         },
         toScreensaver: function() {
             scoreaudio.stop();
-            this.game.state.start('screensaver');
+            this.game.state.start('screensaver', true, false);
+            //this.game.destroy();
+            //location.reload();
         },
         // OK TIME FOR THE KEYPRESS HANDLING
         p1up: function() {
@@ -717,12 +719,14 @@
         backtomain: function() {
             if (backtomain === true) {
                 if (this.game.currentgame === "racer") {
-                    this.game.destroy();
-                    location.reload();
+                    this.game.state.start('screensaver', true, false);
+                    //this.game.destroy();
+                    //location.reload();
                 }
                 scoreaudio.stop();
-                this.game.destroy();
-                location.reload();
+                this.game.state.start('screensaver', true, false);
+                //this.game.destroy();
+                //location.reload();
                 return;
             }
         },
@@ -736,12 +740,14 @@
                 }
             } else if (backtomain === true) {
                 if (this.game.currentgame === "racer") {
-                    this.game.destroy();
-                    location.reload();
+                    this.game.state.start('screensaver', true, false);
+                    //this.game.destroy();
+                    //location.reload();
                 }
                 scoreaudio.stop();
-                this.game.destroy();
-                location.reload();
+                this.game.state.start('screensaver', true, false);
+                //this.game.destroy();
+                //location.reload();
                 return;
             }
         }
