@@ -451,7 +451,7 @@
 
         update: function () {
             // needs back at 30
-            if (screensaver === 500) {
+            if (screensaver === 2500) {
                 music.stop();
 
                 this.game.state.start('screensaver', true, false);

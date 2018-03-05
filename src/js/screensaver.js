@@ -84,6 +84,8 @@
             this.game.team13 = JSON.parse(localStorage.getItem('team13'));
             this.game.team14 = JSON.parse(localStorage.getItem('team14'));
             this.game.team15 = JSON.parse(localStorage.getItem('team15'));
+            console.log("typeof");
+            console.log(typeof(this.game.team15));
             teams.push(this.game.team1, this.game.team2, this.game.team3, this.game.team4, this.game.team5, this.game.team6, this.game.team7, this.game.team8, this.game.team9, this.game.team10,this.game.team11,this.game.team12,this.game.team13,this.game.team14,this.game.team15)
 
             for (var index = 0; index < aantalteams; index++) {
