@@ -826,12 +826,12 @@
                         localStorage.setItem('team12', up);
                         break;
                     case 13:
-                        this.game.team13 = this.game.team1 + 13;
+                        this.game.team13 = this.game.team13 + 1;
                         var up = this.game.team13;
                         localStorage.setItem('team13', up);
                         break;
                     case 14:
-                        this.game.team14 = this.game.team1 + 14;
+                        this.game.team14 = this.game.team14 + 1;
                         var up = this.game.team14;
                         localStorage.setItem('team14', up);
                         break;
