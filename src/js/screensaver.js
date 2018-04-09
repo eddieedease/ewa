@@ -61,9 +61,6 @@
     Screensaver.prototype = {
         create: function() {
             credit = localStorage.getItem('credits');
-            
-
-
             var phaserJSON = this.game.cache.getJSON('needy');
             teamnames = phaserJSON.teamnames;
             aantalteams = phaserJSON.aantal;
@@ -84,8 +81,7 @@
             this.game.team13 = JSON.parse(localStorage.getItem('team13'));
             this.game.team14 = JSON.parse(localStorage.getItem('team14'));
             this.game.team15 = JSON.parse(localStorage.getItem('team15'));
-            console.log("typeof");
-            console.log(typeof(this.game.team15));
+            
             teams.push(this.game.team1, this.game.team2, this.game.team3, this.game.team4, this.game.team5, this.game.team6, this.game.team7, this.game.team8, this.game.team9, this.game.team10,this.game.team11,this.game.team12,this.game.team13,this.game.team14,this.game.team15)
 
             for (var index = 0; index < aantalteams; index++) {
@@ -178,6 +174,7 @@
 
         },
         restartVid: function() {
+            video.stop();
             video.play();
         },
 
@@ -202,6 +199,7 @@
         creditgone: function() {
             this.game.time.events.remove(Phaser.Timer.SECOND * 3, this.creditgone, this);
             valid.visible = false;
+            video.stop();
             this.game.state.start('menu', true, false);
         },
 
@@ -209,18 +207,27 @@
 
             if (cursors.left.isDown) {
                 //  Move to the left
+                video.stop();
+                
                 this.game.state.start('menu', true, false);
             }
             if (cursors.right.isDown) {
-                //  Move to the left
+                //  Move to the right
+                // video.stop();
+                video.stop();
+
                 this.game.state.start('menu', true, false);
             }
             if (cursors.up.isDown) {
                 //  Move to the left
+                video.stop();
+              
                 this.game.state.start('menu', true, false);
             }
             if (cursors.down.isDown) {
                 //  Move to the left
+                video.stop();
+                
                 this.game.state.start('menu', true, false);
             }
             /*canvas.clear();
@@ -275,6 +282,7 @@
         },
         onDown: function(key) {
             console.log(key.keyCode);
+            video.stop();
             if (key.keyCode === 79) {
                 return;
             }
@@ -304,8 +312,6 @@
                 return;
             }
 
-            video.stop();
-            video.destroy();
             this.game.state.start('menu', true, false);
         }
 

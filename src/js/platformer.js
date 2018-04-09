@@ -121,10 +121,10 @@
             audiocoin = this.game.add.audio('coin');
 
             //  A simple background for our game
-            bg1 = this.game.add.sprite(0, -60, 'sky');
-            bg2 = this.game.add.sprite(0, -60, 'pbbg2');
+            bg1 = this.game.add.sprite(0, 0, 'sky');
+            bg2 = this.game.add.sprite(0, 0, 'pbbg2');
             bg2.visible = false;
-            bg3 = this.game.add.sprite(0, -60, 'pbbg3');
+            bg3 = this.game.add.sprite(0, 0, 'pbbg3');
             bg3.visible = false;
 
             //  The platforms group contains the ground and the 2 ledges we can jump on
@@ -134,7 +134,7 @@
             platforms.enableBody = true;
 
             // Here we create the ground.
-            platform = platforms.create(0, this.game.world.height - 70, 'platformground');
+            platform = platforms.create(0, this.game.world.height - 10, 'platformground');
 
             platform.alpha = 0.1;
 

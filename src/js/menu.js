@@ -14,6 +14,7 @@
     var keyq;
     var keyz;
     var keyx;
+    var keyh;
     var keyi;
     var player;
     var cursors;
@@ -142,6 +143,11 @@
 
     var insertsound;
 
+    // local storage warning img
+    var warning;
+
+    var resetvalue = 0;
+
     Menu.prototype = {
 
 
@@ -153,6 +159,7 @@
             timetochooseteams = false;
             teamlinksvar = 0;
             teamrechtsvar = 0;
+            resetvalue = 0;
             currentteamnumber = 1;
             audioalarm = this.game.add.audio('alarm');
             insertsound = this.game.add.audio('insert');
@@ -250,6 +257,9 @@
             keyp = this.input.keyboard.addKey(Phaser.Keyboard.P);
             keyp.onDown.add(this.phonedenied, this);
 
+            keyh = this.input.keyboard.addKey(Phaser.Keyboard.H);
+            keyh.onDown.add(this.resetLocalStorage, this);
+
 
 
             creditnum = this.game.add.bitmapText(this.game.width * 0.63, this.game.height * 0.9, 'scorefont', credit, 45);
@@ -289,10 +299,11 @@
 
 
 
-            alarm = this.game.add.sprite(this.stage.width / 2, this.stage.height / 4, 'processing');
+            alarm = this.game.add.sprite(this.stage.width / 2.60, this.stage.height / 4, 'processing');
             alarmplay = alarm.animations.add('alarm', [0, 1, 2, 3, 4], 10, true);
-            alarm.scale.setTo(2, 2);
             alarm.anchor.setTo(0.5, 0.5);
+            alarm.scale.setTo(2, 2);
+            
             alarm.visible = false;
 
             p1p2 = this.game.add.image(50, 20, 'gameselect');
@@ -447,21 +458,25 @@
                 this.creditadd();
             }
 
+            warning = this.game.add.image(this.game.width / 8 * 4, 300, 'warning');
+            warning.anchor.set(0.5, 0.5);
+            warning.visible = false;
+
         },
 
         update: function () {
             // needs back at 30
             if (screensaver === 2500) {
                 music.stop();
-
+                screensaver = 0;
                 this.game.state.start('screensaver', true, false);
-                // this.game.destroy();
+
                 // location.reload();
             }
             player.body.velocity.x = 0;
             player.body.velocity.y = 0;
 
-            if (gameselect === false) {
+            if (gameselect === false && timetochooseteams === false) {
                 if (cursors.left.isDown) {
                     screensaver = 0;
                     player.body.velocity.x = -200;
@@ -1033,6 +1048,19 @@
 
                 this.game.time.events.loop(Phaser.Timer.SECOND, this.countdowntimer, this);
                 quickstart = true;
+            }
+        },
+        resetLocalStorage : function (){
+            console.log('resetting');
+            resetvalue++;
+            if (resetvalue === 4){
+                warning.visible = true;
+            } else if (resetvalue === 5){
+                warning.visible = false;
+                resetvalue = 0;
+                localStorage.clear();
+                
+                location.reload();
             }
         },
         countdowntimer: function () {

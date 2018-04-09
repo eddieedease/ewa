@@ -71,6 +71,7 @@
             this.load.image('hit4', 'assets/hit4.png');
             this.load.image('hit5', 'assets/hit5.png');
             this.load.image('hit6', 'assets/hit6.png');
+            this.load.image('warning', 'assets/warning.png');
             this.load.image('filmhit', 'assets/filmhit.png');
             this.load.image('gear1', 'assets/gear1.png');
             this.load.image('gear2', 'assets/gear2.png');
