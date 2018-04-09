@@ -713,6 +713,10 @@
             teamnext.loadTexture(nextstring, 0);
         },
         startnow: function () {
+
+            // boolean for checking if we come from choosing teams
+            var fromteamselecttemp = false;
+            
             // First check if is film
 
             if (quickstart === true) {
@@ -767,7 +771,7 @@
                     teamback.visible = false;
                     teamnext.visible = false;
                 }
-
+                fromteamselecttemp = true;
                 teamtext.visible = false;
 
                 timetochooseteams = false;
@@ -880,7 +884,7 @@
 
 
                 // Alright, now check if credits and start game
-                if (playercurrenton != null && credit > 0 && stopforproc !== true) {
+                if (playercurrenton != null && credit > 0 && stopforproc !== true && fromteamselecttemp === false) {
                     creditcost.visible = false;
                     fill.visible = true;
 
@@ -970,7 +974,11 @@
                     }
 
 
-                } else {
+                } else if (fromteamselecttemp === true){
+                    // Do absolutely nothing, itś fine here
+                }
+                else
+                {
                     if (playercurrenton != null) {
                         geencredits.visible = true;
                         geencredits.alpha = 0;
@@ -1051,8 +1059,13 @@
             }
         },
         resetLocalStorage : function (){
-            console.log('resetting');
+            console.log('check');
+            if (resetvalue === 0){
+                this.game.time.events.add(Phaser.Timer.SECOND * 6, this.timerresetend, this);
+            }
+           
             resetvalue++;
+
             if (resetvalue === 4){
                 warning.visible = true;
             } else if (resetvalue === 5){
@@ -1062,6 +1075,10 @@
                 
                 location.reload();
             }
+        },
+        timerresetend : function () {
+            resetvalue = 0;
+            warning.visible = false;
         },
         countdowntimer: function () {
             countdown = countdown - 1;

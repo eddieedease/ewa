@@ -55,7 +55,7 @@
             this.load.image('currentletter', 'assets/currentletter.png');
             this.load.image('valid', 'assets/valid.png');
             this.load.image('timmy', 'assets/timmy.png');
-            this.load.image('diamond', 'assets/diamond.png');
+     
             //preload menu
             this.load.image('cr', 'assets/cr2.png');
             this.load.image('cr2', 'assets/cr.png');
@@ -139,11 +139,11 @@
             this.load.spritesheet('bird', 'assets/bird.png', 184, 184);
             this.load.spritesheet('enemy', 'assets/enemy.png', 50, 96);
             this.load.image('catmousebg', 'assets/catmousebg.png');
-            this.load.image('roos', 'assets/roos.png');
+          
             this.load.spritesheet('coin', 'assets/coin.png', 50, 50);
             this.load.image('powerbar', 'assets/power.png');
             this.load.image('powerbarslider', 'assets/sliderpower.png');
-            this.load.image('p1p2', 'assets/p1p2.png');
+     
             // Racer
             this.load.image('racetrack', 'assets/racetrack3.png');
             this.load.image('racedeco', 'assets/racedeco2.png');
@@ -161,13 +161,13 @@
             this.load.image('star', 'assets/star.png');
             this.load.image('p1life', 'assets/p1life.png');
             this.load.image('p2life', 'assets/p2life.png');
-            this.load.spritesheet('dude', 'assets/dude.png', 32, 48);
             this.load.image('pbbg2', 'assets/pbbg.png');
             this.load.image('pbbg3', 'assets/pbbg2.png');
+            this.load.image('lifeup', 'assets/lifeup.png');
             //scoring
             this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
+          
             this.loadResources();
-            this.load.image('lifeup', 'assets/lifeup.png');
         },
 
         loadResources: function() {

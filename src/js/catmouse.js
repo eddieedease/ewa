@@ -160,7 +160,7 @@
 
                 roos1 = this.game.add.sprite(40, 200, 'bird');
                 this.physics.enable(roos1, Phaser.Physics.ARCADE);
-                roos1.body.setSize(2, 55, 20, 30);
+                //roos1.body.setSize(2, 55, 20, 30);
                 roos1.anchor.setTo(0.5, 0.5);
                 roos1.scale.x = 1;
                 roos1.scale.y = 1;
@@ -242,7 +242,7 @@
 
             roos2 = this.game.add.sprite(960, 350, 'bird');
             this.physics.enable(roos2, Phaser.Physics.ARCADE)
-            roos2.body.setSize(2, 55, -20, 30);
+            //roos2.body.setSize(2, 55, -20, 30);
             roos2.anchor.setTo(0.5, 0.5);
             roos2.scale.x = -1;
             roos2.scale.y = 1;
@@ -823,7 +823,7 @@
                 // Shoot it in the right direction
                 bullet.body.velocity.x = Math.cos(bullet.rotation) * BULLET_SPEED;
                 bullet.body.velocity.y = Math.sin(bullet.rotation) * BULLET_SPEED;
-                energyp1 = energyp1 - 4;
+                energyp1 = energyp1 - 2;
             }
 
 
@@ -859,7 +859,7 @@
                 // Shoot it in the right direction
                 bullet.body.velocity.x = -Math.cos(bullet.rotation) * BULLET_SPEED;
                 bullet.body.velocity.y = -Math.sin(bullet.rotation) * BULLET_SPEED;
-                energyp2 = energyp2 - 4;
+                energyp2 = energyp2 - 2;
             }
 
 
@@ -913,7 +913,7 @@
         render: function() {
 
             //this.game.debug.body(roos1);
-            //this.game.debug.body(roos2);
+            // this.game.debug.body(roos2);
         }
 
     };
