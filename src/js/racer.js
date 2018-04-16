@@ -29,7 +29,7 @@
 
     var lastten;
 
-    var timerdisplay;
+    var timerdisplay2;
     var counter = 40;
 
     // TODO don't set it here
@@ -300,11 +300,11 @@
 
             this.game.camera.follow(car1, Phaser.Camera.FOLLOW_LOCKON);
 
-            timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6, 40, 'scorefont', 'READY', 30);
-            timerdisplay.anchor.setTo(0.5, 0.5);
-            //timerdisplay.fixedToCamera = true;
-            //timerdisplay.anchor.setTo(0.5, 0.5);
-            this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
+            timerdisplay2 = this.game.add.bitmapText(this.game.world.centerX + 6, 40, 'scorefont', 'READY', 30);
+            timerdisplay2.anchor.setTo(0.5, 0.5);
+            //timerdisplay2.fixedToCamera = true;
+            //timerdisplay2.anchor.setTo(0.5, 0.5);
+            this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoopracer, this);
 
 
 
@@ -351,17 +351,17 @@
         },
 
 
-        timerLoop: function() {
+        timerLoopracer: function() {
             //slidertweento.start();
             if (counter != 0) {
                 counter--;
-                timerdisplay.setText(counter);
+                timerdisplay2.setText(counter);
 
                 if (counter === 9) {
                     lastten = true;
                     flag.scale.setTo(0.9, 0.9);
-                    timerdisplay.kill();
-                    timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6, 40, 'scorefont', '9', 50);
+                    timerdisplay2.kill();
+                    timerdisplay2 = this.game.add.bitmapText(this.game.world.centerX + 6, 40, 'scorefont', '9', 50);
                     this.track.tint = 0xff0000;
                 } else if (counter === 8) {
                     this.track.tint = 0xFFFFFF;
@@ -388,24 +388,23 @@
                 counter = 30;
                 music.stop();
                 audiosgas.stop();
-                this.game.state.clearCurrentState('racer');
                 this.game.state.start('score');
             }
 
-            //timerdisplay.fixedToCamera = true;
+            //timerdisplay2.fixedToCamera = true;
         },
 
         update: function() {
             if (lastten === false) {
                 flag.x = this.game.camera.x + 500;
                 flag.y = this.game.camera.y + 50;
-                timerdisplay.x = this.game.camera.x + 505;
-                timerdisplay.y = this.game.camera.y + 44;
+                timerdisplay2.x = this.game.camera.x + 505;
+                timerdisplay2.y = this.game.camera.y + 44;
             } else {
                 flag.x = this.game.camera.x + 500;
                 flag.y = this.game.camera.y + 65;
-                timerdisplay.x = this.game.camera.x + 490;
-                timerdisplay.y = this.game.camera.y + 36;
+                timerdisplay2.x = this.game.camera.x + 490;
+                timerdisplay2.y = this.game.camera.y + 36;
             }
 
 
@@ -553,7 +552,7 @@
             leveluptween.onComplete.add(this.removelevelup, this);
         },
         checkAdd: function() {
-            timerdisplay.setText(counter);
+            timerdisplay2.setText(counter);
             audiocoin.play();
             scorep1 = scorep1 + 75;
             scoringtext.setText("score: " + scorep1);

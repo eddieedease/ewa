@@ -469,7 +469,7 @@
             if (screensaver === 2500) {
                 music.stop();
                 screensaver = 0;
-                this.game.state.start('screensaver', true, false);
+                this.game.state.start('screensaver');
 
                 // location.reload();
             }
@@ -785,6 +785,7 @@
 
                 switch (currentteamnumber) {
                     case 1:
+                        
                         this.game.team1 = this.game.team1 + 1;
                         var up = this.game.team1;
                         localStorage.setItem('team1', up);
@@ -866,7 +867,7 @@
                 // https://cubestick.nl/ewasteapp/api/api/getall
                 // url for iot http://localhost:8888/ewacon/src/api/arcade/addphone/1/11
                 // make IOT call
-                //
+                
                 this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addphone/" + arcadeid + "/" + this.game.aantalphones + "/" + currentteamnumber + "/" + up);
                 // console.log("http://localhost:8888/ewacon/src/api/arcade/addphone/" + arcadeid + "/" + currentteamnumber);
                 //; 
@@ -990,7 +991,7 @@
                 }
             } else if (gamestarted === false && gameselect === true && modeisselected === true) {
 
-                console.log("komt hier nie")
+                
 
                 teamcurrent.visible = false;
 
@@ -1004,7 +1005,10 @@
 
                 var whichstringteam = 'team' + currentteamnumber;
                 var addwhat = teamarray[currentteamnumber - 1] + 1;
-                localStorage.setItem(whichstringteam, addwhat);
+                
+                console.log("addeeeeddddddd culprit")
+                
+                // localStorage.setItem(whichstringteam, addwhat);
 
 
                 music.stop();
@@ -1120,6 +1124,7 @@
         },
 
         makeIOTcall: function (theUrl) {
+            
             var xmlHttp = new XMLHttpRequest();
             xmlHttp.onreadystatechange = function () {
                 if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
@@ -1165,7 +1170,7 @@
         breakoutstart: function () {
             music.stop();
             //this.game.state.start('breakout');
-            this.game.state.start('score', false, false);
+            this.game.state.start('score');
         },
         catmousestart: function () {
             music.stop();
@@ -1262,6 +1267,8 @@
                 player.visible = true;
                 stopforproc = false;
                 teamtext.visible = false;
+
+                
                 // TODO make an IOT call, one team to the database - ewacon (standard);
                 this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/addphone/" + arcadeid + "/1");
             } else {

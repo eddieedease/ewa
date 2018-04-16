@@ -116,6 +116,8 @@
         create: function() {
 
 
+            toScore = false;
+
             name1 = ["a", "", "", ""];
             name2 = ["a", "", "", ""];
 
@@ -127,6 +129,11 @@
             backbutton = this.game.add.sprite(25, 440, 'backbutton');
             dudes.anchor.setTo(0.5, 0.5);
             dudes.visible = false;
+
+             // adding timer
+             timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6,this.game.world.height - 40, 'scorefont', '', 45);
+             timerdisplay.anchor.setTo(0.5, 0.5);
+             timerdisplay.visible = true;
 
             counter = 45;
 
@@ -180,6 +187,7 @@
                     break;
                 case "racer":
                 iotgamenumber = 3;
+                    p2ready = false;
                     scoresArray = this.game.highgame3[0];
                     nameArray = this.game.highgame3[1];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Race 'm rond", 40);
@@ -217,7 +225,7 @@
 
             // checking score player 2
             for (var o = 0; o < scoresArray.length; o++) {
-                if (scoresArray[o] >= scorep2 || scorep2 == null) {
+                if (scoresArray[o] >= scorep2 || scorep2 === null) {
 
                 } else {
 
@@ -244,6 +252,7 @@
 
             if (highp1) {
                 highscoreishit = true;
+                
                 this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
                 timeralready = true;
                 knoppenscore.visible = true;
@@ -280,6 +289,7 @@
             if (highp2 && this.game.multiplay === true) {
                 highscoreishit = true;
                 if (timeralready === false) {
+                   
                     this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
                 }
                 knoppenscore.visible = true;
@@ -344,9 +354,7 @@
 
 
 
-            // adding timer
-            timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6,this.game.world.height - 40, 'scorefont', '', 45);
-            timerdisplay.anchor.setTo(0.5, 0.5);
+           
 
         },
 
@@ -364,8 +372,6 @@
                 timerdisplay.setText(" ");
                 p1ready = true;
                 p2ready = true;
-
-
                 if (highp1){
                     genname1 = name1.join('');
                     p1ready = true;
@@ -397,10 +403,12 @@
 
             if (counter > 0) {
                 counter--;
+                
                 if (p1ready === true && p2ready == true) {
                     timerdisplay.setText(" ");
                 } else {
                     timerdisplay.setText(counter);
+                  
                 }
 
             } else {
@@ -428,15 +436,6 @@
         },
 
         showscores: function() {
-
-            
-           
-
-            
-
-          
-            
-
             if (p1ready && p2ready) {
                 //dudes.visible = true;
             if (highscoreishit === true){
@@ -517,6 +516,12 @@
         },
         toScreensaver: function() {
             scoreaudio.stop();
+
+            if (this.game.currentgame === 'racer'){
+                location.reload(true);
+            }
+           
+
             this.game.state.start('screensaver', true, false);
             //this.game.destroy();
             //location.reload();
@@ -719,15 +724,14 @@
         backtomain: function() {
             if (backtomain === true) {
                 if (this.game.currentgame === "racer") {
-                    this.game.state.start('screensaver', true, false);
+                    // this.game.state.start('screensaver');
                     //this.game.destroy();
-                    //location.reload();
+                    location.reload();
+                } else {
+                    scoreaudio.stop();
+                    this.game.state.start('screensaver', true, false);
                 }
-                scoreaudio.stop();
-                this.game.state.start('screensaver', true, false);
-                //this.game.destroy();
-                //location.reload();
-                return;
+              
             }
         },
         p2back: function() {
@@ -740,15 +744,11 @@
                 }
             } else if (backtomain === true) {
                 if (this.game.currentgame === "racer") {
+                    location.reload();
+                } else {
+                    scoreaudio.stop();
                     this.game.state.start('screensaver', true, false);
-                    //this.game.destroy();
-                    //location.reload();
                 }
-                scoreaudio.stop();
-                this.game.state.start('screensaver', true, false);
-                //this.game.destroy();
-                //location.reload();
-                return;
             }
         }
 
