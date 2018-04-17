@@ -517,14 +517,14 @@
         toScreensaver: function() {
             scoreaudio.stop();
 
-            if (this.game.currentgame === 'racer'){
-                location.reload(true);
-            }
+            // if (this.game.currentgame === 'racer'){
+            //     location.reload(true);
+            // }
            
 
-            this.game.state.start('screensaver', true, false);
-            //this.game.destroy();
-            //location.reload();
+            // this.game.state.start('screensaver', true, false);
+            this.game.destroy();
+            location.reload();
         },
         // OK TIME FOR THE KEYPRESS HANDLING
         p1up: function() {
