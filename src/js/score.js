@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     function Score() {
@@ -113,7 +113,7 @@
 
 
     Score.prototype = {
-        create: function() {
+        create: function () {
 
 
             toScore = false;
@@ -130,10 +130,10 @@
             dudes.anchor.setTo(0.5, 0.5);
             dudes.visible = false;
 
-             // adding timer
-             timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6,this.game.world.height - 40, 'scorefont', '', 45);
-             timerdisplay.anchor.setTo(0.5, 0.5);
-             timerdisplay.visible = true;
+            // adding timer
+            timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6, this.game.world.height - 40, 'scorefont', '', 45);
+            timerdisplay.anchor.setTo(0.5, 0.5);
+            timerdisplay.visible = true;
 
             counter = 45;
 
@@ -180,26 +180,26 @@
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Raak 'm vaak", 40);
                     break;
                 case "catmouse":
-                iotgamenumber = 2;
+                    iotgamenumber = 2;
                     scoresArray = this.game.highgame2[0];
                     nameArray = this.game.highgame2[1];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Gooi je zooi", 40);
                     break;
                 case "racer":
-                iotgamenumber = 3;
+                    iotgamenumber = 3;
                     p2ready = false;
                     scoresArray = this.game.highgame3[0];
                     nameArray = this.game.highgame3[1];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Race 'm rond", 40);
                     break;
                 case "platformer":
-                iotgamenumber = 4;
+                    iotgamenumber = 4;
                     scoresArray = this.game.highgame4[0];
                     nameArray = this.game.highgame4[1];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "Prullenbak Bullebak", 40);
                     break;
                 case "other":
-                iotgamenumber = 0;
+                    iotgamenumber = 0;
                     console.log("Not coming from any game");
                     scoresArray = this.game.highgame1[0];
                     gamename = this.game.add.bitmapText(this.game.width / 2, this.game.height / 10, 'scorefont', "TEST", 40);
@@ -213,7 +213,7 @@
             // this will
             for (var w = 0; w < scoresArray.length; w++) {
                 //console.log(w + "  " + scoresArray[w])
-                if (scoresArray[w] >= scorep1 || scorep1 == null) {
+                if (scoresArray[w] >= scorep1 || scorep1 === null || scorep1 === undefined) {
 
                 } else {
                     highp1 = true;
@@ -223,9 +223,9 @@
                 }
             };
 
-            // checking score player 2
+           
             for (var o = 0; o < scoresArray.length; o++) {
-                if (scoresArray[o] >= scorep2 || scorep2 === null) {
+                if (scoresArray[o] >= scorep2 || scorep2 === null || scorep2 === undefined) {
 
                 } else {
 
@@ -252,7 +252,7 @@
 
             if (highp1) {
                 highscoreishit = true;
-                
+
                 this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
                 timeralready = true;
                 knoppenscore.visible = true;
@@ -289,7 +289,7 @@
             if (highp2 && this.game.multiplay === true) {
                 highscoreishit = true;
                 if (timeralready === false) {
-                   
+
                     this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
                 }
                 knoppenscore.visible = true;
@@ -354,25 +354,25 @@
 
 
 
-           
+
 
         },
 
         // UPDATE, do not use the update loop in this one
-        update: function() {
+        update: function () {
 
 
 
 
         },
-        timerLoop: function() {
+        timerLoop: function () {
             //slidertweento.start();
             if (counter === 0 && toScore === false) {
                 toScore = true;
                 timerdisplay.setText(" ");
                 p1ready = true;
                 p2ready = true;
-                if (highp1){
+                if (highp1 === true) {
                     genname1 = name1.join('');
                     p1ready = true;
                     headertext.text = '';
@@ -384,7 +384,8 @@
                     nameArray.splice(5, 1);
                 }
 
-                if (highp2){
+                if (highp2 === true) {
+                    console.log("whut");
                     genname2 = name2.join('');
                     p2ready = true;
                     aantalhigh--;
@@ -403,12 +404,12 @@
 
             if (counter > 0) {
                 counter--;
-                
+
                 if (p1ready === true && p2ready == true) {
                     timerdisplay.setText(" ");
                 } else {
                     timerdisplay.setText(counter);
-                  
+
                 }
 
             } else {
@@ -435,16 +436,16 @@
             xmlHttp.send(null);
         },
 
-        showscores: function() {
+        showscores: function () {
             if (p1ready && p2ready) {
                 //dudes.visible = true;
-            if (highscoreishit === true){
-                var milliseconds = new Date().getTime();
-                console.log("sending");
-                // sending to the iot connection
-                this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/submitscore/" + iotarcadeid + "/"+ iotgamenumber + "?rnd="+ milliseconds +"&name1=" + nameArray[0] + "&score1=" + scoresArray[0] + "&name2=" + nameArray[1]+ "&score2="+ scoresArray[1]+ "&name3=" + nameArray[2] + "&score3=" +scoresArray[2] + "&name4=" +nameArray[3] + "&score4=" + scoresArray[3] + "&name5=" + nameArray[4]+ "&score5=" + scoresArray[4]);
-                highscoreishit = false
-            }
+                if (highscoreishit === true) {
+                    var milliseconds = new Date().getTime();
+                    console.log("sending");
+                    // sending to the iot connection
+                    this.makeIOTcall("https://ewastearcades.nl/online/api/arcade/submitscore/" + iotarcadeid + "/" + iotgamenumber + "?rnd=" + milliseconds + "&name1=" + nameArray[0] + "&score1=" + scoresArray[0] + "&name2=" + nameArray[1] + "&score2=" + scoresArray[1] + "&name3=" + nameArray[2] + "&score3=" + scoresArray[2] + "&name4=" + nameArray[3] + "&score4=" + scoresArray[3] + "&name5=" + nameArray[4] + "&score5=" + scoresArray[4]);
+                    highscoreishit = false
+                }
                 knoppenscore.visible = false;
                 backbutton.visible = true;
                 dudes.visible = true;
@@ -479,7 +480,7 @@
 
                 //clean up everything
                 if (highp1) {
-                  
+
                     let11.destroy();
                     let12.destroy();
                     let13.destroy();
@@ -514,20 +515,20 @@
 
             this.game.time.events.add(Phaser.Timer.SECOND * 15, this.toScreensaver, this);
         },
-        toScreensaver: function() {
+        toScreensaver: function () {
             scoreaudio.stop();
 
             // if (this.game.currentgame === 'racer'){
             //     location.reload(true);
             // }
-           
+
 
             // this.game.state.start('screensaver', true, false);
             this.game.destroy();
             location.reload();
         },
         // OK TIME FOR THE KEYPRESS HANDLING
-        p1up: function() {
+        p1up: function () {
 
 
             if (p1ready === false) {
@@ -568,7 +569,7 @@
             //letters1[currentnumber1].setText = "b"
             //letters1[currentnumber1] = this.game.add.bitmapText(this.game.width / 2 - 80, this.game.height / 2, 'scorefont', alfabet[currentletter1], 50);
         },
-        p1down: function() {
+        p1down: function () {
 
             if (p1ready === false) {
                 var q;
@@ -599,7 +600,7 @@
                 name1[currentnumber1] = alfabet[currentletter1];
             }
         },
-        p2up: function() {
+        p2up: function () {
             if (p2ready === false) {
                 var q;
                 //is.game.world.remove(letters2[currentnumber2]);
@@ -630,7 +631,7 @@
                 name2[currentnumber2] = alfabet[currentletter2];
             }
         },
-        p2down: function() {
+        p2down: function () {
 
             if (p2ready === false) {
                 var q;
@@ -664,7 +665,7 @@
             }
 
         },
-        p1ok: function() {
+        p1ok: function () {
 
 
             if (p1ready === false) {
@@ -672,7 +673,7 @@
                     currentnumber1++;
                     arrowcurrent1.x = arrowcurrent1.x + 50;
                 } else {
-                    
+
                     //TODO set ok for score. set all
                     genname1 = name1.join('');
                     p1ready = true;
@@ -688,7 +689,7 @@
 
             }
         },
-        p2ok: function() {
+        p2ok: function () {
 
 
 
@@ -711,7 +712,7 @@
                 }
             }
         },
-        p1back: function() {
+        p1back: function () {
             if (p1ready === false) {
                 if (currentnumber1 != 0) {
                     currentnumber1--;
@@ -721,7 +722,7 @@
                 }
             }
         },
-        backtomain: function() {
+        backtomain: function () {
             if (backtomain === true) {
                 if (this.game.currentgame === "racer") {
                     // this.game.state.start('screensaver');
@@ -731,10 +732,10 @@
                     scoreaudio.stop();
                     this.game.state.start('screensaver', true, false);
                 }
-              
+
             }
         },
-        p2back: function() {
+        p2back: function () {
             if (p2ready === false) {
                 if (currentnumber2 !== 0) {
                     currentnumber2--;
