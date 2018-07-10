@@ -131,7 +131,7 @@
             dudes.visible = false;
 
             // adding timer
-            timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6, this.game.world.height - 40, 'scorefont', '', 45);
+            timerdisplay = this.game.add.bitmapText(this.game.world.centerX + 6, this.game.world.height - 20, 'scorefont', '', 45);
             timerdisplay.anchor.setTo(0.5, 0.5);
             timerdisplay.visible = true;
 
@@ -288,6 +288,7 @@
 
             if (highp2 && this.game.multiplay === true) {
                 highscoreishit = true;
+                p2ready = false;
                 if (timeralready === false) {
 
                     this.game.time.events.loop(Phaser.Timer.SECOND, this.timerLoop, this);
@@ -439,6 +440,7 @@
         showscores: function () {
             if (p1ready && p2ready) {
                 //dudes.visible = true;
+                headertext.text = '';
                 if (highscoreishit === true) {
                     var milliseconds = new Date().getTime();
                     console.log("sending");
@@ -677,7 +679,7 @@
                     //TODO set ok for score. set all
                     genname1 = name1.join('');
                     p1ready = true;
-                    headertext.text = '';
+                    
                     aantalhigh--;
                     arrowcurrent1.visible = false;
                     scoresArray.splice(plek1, 0, scorep1);

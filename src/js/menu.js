@@ -171,6 +171,7 @@
             aantalteams = phaserJSON.aantal;
             teamnames = phaserJSON.teamnames;
             arcadeid = phaserJSON.id;
+            console.log(arcadeid);
             console.log(teamnames);
 
             kiesspel = this.game.add.sprite(60, 10, 'kiesspel');

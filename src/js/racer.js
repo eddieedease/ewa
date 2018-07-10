@@ -30,7 +30,7 @@
     var lastten;
 
     var timerdisplay2;
-    var counter = 40;
+    var counter = 15;
 
     // TODO don't set it here
     var scorep1 = 0;
@@ -356,6 +356,15 @@
             if (counter != 0) {
                 counter--;
                 timerdisplay2.setText(counter);
+
+                if (counter > 9 && lastten === true) {
+                    lastten = false;
+                    flag.scale.setTo(0.5, 0.5);
+                    this.track.tint = 0xFFFFFF;
+                    timerdisplay2.kill();
+                    timerdisplay2 = this.game.add.bitmapText(this.game.world.centerX + 6, 40, 'scorefont', '10', 30);
+                    timerdisplay2.anchor.setTo(0.5, 0.5);
+                }
 
                 if (counter === 9) {
                     lastten = true;
